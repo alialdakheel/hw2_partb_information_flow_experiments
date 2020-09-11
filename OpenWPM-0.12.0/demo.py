@@ -7,10 +7,10 @@ import copy
 import json
 
 # The list of sites that we wish to crawl
-NUM_BROWSERS = 1
+NUM_BROWSERS = 2
 sites = [
     'http://www.example.com',
-    'http://www.princeton.edu',
+    # 'http://www.princeton.edu',
     # 'http://citp.princeton.edu/'
 ]
 
@@ -30,7 +30,7 @@ for i in range(NUM_BROWSERS):
     browser_params[i]['js_instrument'] = True
     # Record the callstack of all WebRequests made
     browser_params[i]['callstack_instrument'] = True
-    browser_params[i]['display_mode'] = 'headless'
+    # browser_params[i]['display_mode'] = 'headless'
 # Launch only browser 0 headless
 # browser_params[0]['display_mode'] = 'headless'
 
@@ -52,8 +52,7 @@ for site in sites:
         print("CommandSequence {} done".format(val)))
 
     # Start by visiting the page
-    command_sequence.get(sleep=3, timeout=60)
-    print(site)
+    command_sequence.get(sleep=3, timeout=120)
     command_sequence.dump_page_source("_".join(site.split('.')[-2:]))
 
     # Run commands across the three browsers (simple parallelization)

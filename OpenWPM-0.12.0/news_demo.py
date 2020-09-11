@@ -5,7 +5,7 @@ import os
 import logging
 from pprint import pprint
 
-NUM_BROWSERS = 2
+NUM_BROWSERS = 1
 news_site = "https://news.google.com"
 
 # Loads the default manager params
@@ -36,7 +36,8 @@ manager = TaskManager.TaskManager(
 command_sequence = CommandSequence.CommandSequence(
     news_site, reset=True,
     callback=lambda success, val=news_site:
-    print("CommandSequence {} done".format(val)))
+    print("CommandSequence {} done".format(val))
+    )
 
 command_sequence.get(sleep=3, timeout=60)
 command_sequence.dump_page_source("_".join(news_site.split('.')[-2:]))
@@ -46,10 +47,12 @@ def get_news_headline(**kwargs):
     a_elem_news = driver.find_elements_by_xpath("//article[1]//h3//a")
     headlines = [a_elem.get_attribute("innerHTML") for a_elem in a_elem_news]
     pprint(headlines)
+    print("=" * 60)
 
 command_sequence.run_custom_function(get_news_headline)
 
 # Run commands across the browsers
-manager.execute_command_sequence(command_sequence)
+for i in range(len(manager.browsers)):
+    manager.execute_command_sequence(command_sequence, i)
 
 manager.close()
