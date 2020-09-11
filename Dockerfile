@@ -18,8 +18,6 @@ RUN apt-get clean -qq \
 RUN wget https://github.com/mozilla/OpenWPM/archive/v0.12.0.zip
 RUN unzip v0.12.0.zip
 
-RUN git clone https://github.com/tadatitam/info-flow-experiments.git adfisher
-RUN cp adfisher /opt
 
 ENV HOME /opt
 RUN cp OpenWPM-0.12.0/scripts/install-miniconda.sh .
@@ -29,6 +27,8 @@ ENV PATH $HOME/miniconda/bin:$PATH
 
 # Install OpenWPM
 WORKDIR /opt/OpenWPM
+#RUN git clone https://github.com/tadatitam/info-flow-experiments.git adfisher
+RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/news_demo.py
 RUN ./install.sh
 ENV PATH $HOME/miniconda/envs/openwpm/bin:$PATH
 
