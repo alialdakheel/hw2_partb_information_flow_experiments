@@ -5,7 +5,7 @@ import os
 import logging
 from pprint import pprint
 
-NUM_BROWSERS = 1
+NUM_BROWSERS = 2
 news_site = "https://news.google.com"
 
 # Loads the default manager params
