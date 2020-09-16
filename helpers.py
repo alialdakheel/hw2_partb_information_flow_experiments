@@ -1,5 +1,20 @@
 import news
+import pickle
 import numpy as np
+
+def file_to_list(path):
+    with open(path, 'r') as fp:
+        l = [elem for elem in fp]
+    return l
+
+def pickle_h(l, path):
+    with open(path, 'wb') as fp:
+        pickle.dump(l, fp)
+
+def unpickle_h(path):
+    with open(path, 'rb') as fp:
+        l = pickle.load(fp)
+    return l
 
 def freq_news_vectors(news_vec_list):
     # returns a frequency vector of news, when input a list of newsVecs
