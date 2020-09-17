@@ -4,7 +4,7 @@ import numpy as np
 
 def file_to_list(path):
     with open(path, 'r') as fp:
-        l = [elem for elem in fp]
+        l = [elem.strip().strip("\n") for elem in fp]
     return l
 
 def pickle_h(l, path):

@@ -55,22 +55,16 @@ def search_and_visit(query, n, **kwargs):
     time.sleep(1)
     wait_until_loaded(driver, 300)
 
-    # results = [h_elem.get_attribute("innerHTML") for h_elem in h_elems]
-    url = driver.current_url
-
-    # h_elems = driver.find_elements_by_xpath(f"//div[@class='g']/div[@class='rc']/div[@class='r']//h3")
-    # a_elems = driver.find_elements_by_xpath(f"//div[@class='g']/div[@class='rc']/div[@class='r']//a")
     if n > 10: raise Exception("Choose samller n")
     for i in range(1, n+1):
-        h_elem = driver.find_element_by_xpath(f"//div[@class='g'][{i}]/div[@class='rc']/div[@class='r']//h3")
-        a_elem = driver.find_element_by_xpath(f"//div[@class='g'][{i}]/div[@class='rc']/div[@class='r']//a")
-        # h_elem = h_elems[i]
-        # a_elem = a_elems[i]
-
-    # for a_elem, h_elem in zip(a_elems[:n], h_elems[:n]):
+        h_elem = driver.find_element_by_xpath(
+                f"//div[@class='g'][{i}]/div[@class='rc']/div[@class='r']//h3"
+                )
+        a_elem = driver.find_element_by_xpath(
+                f"//div[@class='g'][{i}]/div[@class='rc']/div[@class='r']//a"
+                )
         print(f"Click on {h_elem.get_attribute('innerHTML')}")
         print(a_elem.get_attribute("href"))
-        # a_elem.click()
         try:
             a_elem.send_keys(Keys.CONTROL + Keys.RETURN)
         except Exception as e:
@@ -79,12 +73,7 @@ def search_and_visit(query, n, **kwargs):
             continue
         time.sleep(1)
         wait_until_loaded(driver, 300)
-        # driver.back()
-        # driver.navigate().to(url)
-        # time.sleep(1)
-        # wait_until_loaded(driver, 300)
 
-    # pprint(results)
     print("=" * 60)
 
 command_sequence.run_custom_function(search_and_visit, (query, number_of_clicks))

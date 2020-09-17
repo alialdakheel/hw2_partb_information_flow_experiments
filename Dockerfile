@@ -18,7 +18,6 @@ RUN apt-get clean -qq \
 RUN wget https://github.com/mozilla/OpenWPM/archive/v0.12.0.zip
 RUN unzip v0.12.0.zip
 
-
 ENV HOME /opt
 RUN cp OpenWPM-0.12.0/scripts/install-miniconda.sh .
 RUN cp -r OpenWPM-0.12.0 /opt/OpenWPM
@@ -27,8 +26,20 @@ ENV PATH $HOME/miniconda/bin:$PATH
 
 # Install OpenWPM
 WORKDIR /opt/OpenWPM
-#RUN git clone https://github.com/tadatitam/info-flow-experiments.git adfisher
+RUN git clone https://github.com/tadatitam/info-flow-experiments.git adfisher
+RUN mkdir logs
+RUN rm environment.yaml
+RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/OpenWPM-0.12.0/environment.yaml
 RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/news_demo.py
+RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/google_click_search_demo.py
+RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/google_search_demo.py
+RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/helpers.py
+RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/news.py
+RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/ml.py
+RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/ml_test.py
+RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/permutation_test.py
+RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/statistics.py
+COPY hw2.py .
 RUN ./install.sh
 ENV PATH $HOME/miniconda/envs/openwpm/bin:$PATH
 
