@@ -39,6 +39,8 @@ RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_fl
 RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/ml_test.py
 RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/permutation_test.py
 RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/statistics.py
+RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/queries.txt
+RUN wget https://raw.githubusercontent.com/alialdakheel/hw2_partb_information_flow_experiments/master/sites.txt
 COPY hw2.py .
 RUN ./install.sh
 ENV PATH $HOME/miniconda/envs/openwpm/bin:$PATH
