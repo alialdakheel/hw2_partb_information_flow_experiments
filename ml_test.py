@@ -1,4 +1,5 @@
 from news import News, NewsVector
+import numpy as np
 import helpers
 import ml
 import permutation_test
@@ -40,12 +41,14 @@ def test_news_perm():
     nv2.add(n4)
     nv2.label = n3.label
 
-    news_vecs = [[nv1, nv1] ,[nv2, nv2]] * 6 
+    news_vecs = [[nv1, nv1] ,[nv2, nv2]] * 10
     num_agents = 2
 
     X, y, union = helpers.get_feature_vectors(news_vecs, num_agents)
     classifier, y_pred, y_true = ml.train_and_test(X, y, verbose=True)
 
+    test_accuracy = (y_pred == y_true).sum() / sum(map(len, y_pred))
+    print(f"Test acc: {test_accuracy}")
     test_stat = correctly_classified
     p_value = permutation_test.blocked_sampled_test(
             y_pred,
