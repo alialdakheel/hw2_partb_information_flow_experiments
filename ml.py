@@ -221,7 +221,7 @@ def crossVal_algo(k, algo, params, X, y, splittype, splitfrac, verbose=False):  
             classifier = clf
     return max, max_params, classifier
 
-def train_and_test(X, y, splittype='timed', splitfrac=0.1, nfolds=10, 
+def train_and_test(X, y, splittype='timed', splitfrac=0.2, nfolds=10, 
         verbose=False):
     
     algos = {   
